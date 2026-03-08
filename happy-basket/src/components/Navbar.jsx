@@ -6,8 +6,8 @@ import Searchbar from "./Searchbar";
 import { useData } from "../context/ApiDataProvider";
 import NavMenubar from "./NavMenubar";
 
-function Navbar() {
-  const { data, loading, error } = useData();
+function Navbar({data}) {
+  // const { data, loading, error } = useData();
   const addr = "Sivajinagar, RoadNo. 4, Vadlapudi, Visakhapatnam, 530046";
   return (
     <nav className="flex flex-col gap-1 bg-stone-700">
@@ -28,7 +28,7 @@ function Navbar() {
           </div>
         </div>
         <div>
-          <Link to="/auth" className="block p-2 bg-white rounded-full mt-1 ">
+          <Link to="/auth" className="block p-2 bg-white rounded-full mt-1">
             <LuUserRound className="size-3" />
           </Link>
         </div>
@@ -38,9 +38,9 @@ function Navbar() {
         <div className="flex gap-4 px-2 justify-between">
           <Searchbar />
           <div>
-            <div className="p-3 bg-white rounded-full">
+            <Link to={"/checkout"} className="block p-3 bg-white rounded-full">
               <LuNotepadText className="size-4" />
-            </div>
+            </Link>
           </div>
         </div>
 

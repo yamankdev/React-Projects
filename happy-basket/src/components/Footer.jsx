@@ -8,13 +8,13 @@ function Footer() {
   return (
     <footer>
       {/* Brand Logo and About project */}
-      <div className="bg-stone-400">
+      <div className="bg-stone-400 px-2 py-4">
         <img
           src="/brandLogo.png"
           alt="HappyBasket image"
           className="h-20 mx-auto"
         />
-        <p className="p-3 text-[0.8rem]">
+        <p className="p-3 text-[0.8rem] text-justify">
           HappyBasket is a developer-driven project created by YaMaN, to
           showcase attention to details, user convenience, scalability, speed
           and reliability. It reflects YaMaN’s dedication to create practical,

@@ -7,7 +7,8 @@ import { FaXTwitter } from "react-icons/fa6";
 function Authpage() {
   //   const navigate = useNavigate();
   return (
-    <div className="bg-gray-300 absolute top-0 z-3">
+    //  absolute top-0 z-3
+    <div className="bg-gray-300 absolute top-0">
       <div className="flex px-4 py-1 gap-3 mt-10">
         <Link to={"/"} className="size-6">
           <BiArrowBack className="mt-[0.2rem]" />
@@ -22,7 +23,10 @@ function Authpage() {
               Get exclusive offers and discounts on every order. Join now!
             </p>
           </div>
-          <Link className="flex justify-between py-2 px-2 mb-1 text-white w-full ">
+          <Link
+            to={"/login"}
+            className="flex justify-between py-2 px-2 mb-1 text-white w-full "
+          >
             <span className="text-[0.8rem] font-bold">Log In / Sign up</span>
             <span>
               <SlArrowRight className="mt-[0.15rem]" />
@@ -37,25 +41,25 @@ function Authpage() {
         </p>
         <div className="flex justify-evenly">
           <div className="w-[25%] flex flex-col items-center">
-            <img src="" alt="" className="border size-18  rounded-xl" />
+            <img alt="" className="border size-18  rounded-xl" />
             <figcaption className="text-[0.7rem] font-semibold mt-1">
               hbWellness
             </figcaption>
           </div>
           <div className="w-[25%] flex flex-col items-center">
-            <img src="" alt="" className="border size-18 rounded-xl" />
+            <img alt="" className="border size-18 rounded-xl" />
             <figcaption className="text-[0.7rem] font-semibold mt-1">
               hbLifestyle
             </figcaption>
           </div>
           <div className="w-[25%] flex flex-col items-center">
-            <img src="" alt="" className="border size-18 rounded-xl" />
+            <img alt="" className="border size-18 rounded-xl" />
             <figcaption className="text-[0.7rem] font-semibold mt-1">
               Donation
             </figcaption>
           </div>
           <div className="w-[25%] flex flex-col items-center">
-            <img src="" alt="" className="border size-18 rounded-xl" />
+            <img alt="" className="border size-18 rounded-xl" />
             <figcaption className="text-[0.7rem] font-semibold mt-1">
               Offers
             </figcaption>
@@ -89,7 +93,9 @@ function Authpage() {
           <p className="text-[0.8rem] text-center mt-1">
             <b>&copy; 2026 HappyBasket&trade;</b> — Made by YaMaN with ♥
           </p>
-          <pre className="text-[0.9rem] text-center text-gray-700 -mt-2">v1.0.0</pre>
+          <pre className="text-[0.9rem] text-center text-gray-700 -mt-2">
+            v1.0.0
+          </pre>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
+import Loadingpage from "../pages/Loadingpage";
 
 const ApiContext = createContext();
 
@@ -36,7 +37,7 @@ function ApiDataProvider({ children }) {
     fetchedApiData();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loadingpage />;
   if (error) return <p>Error: {error}</p>;
 
   return (

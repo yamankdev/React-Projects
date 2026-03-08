@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom";
+
 function ProductSlideCard({ prod }) {
   return (
-    <div className="w-30 p-2 shrink-0 shadow-lg shadow-gray-600">
-      <img
-        src={prod.image}
-        alt={prod.name}
-        className="h-30 mx-auto"
-      />
+    <Link
+      to={"/product"}
+      className="w-30 p-2 shrink-0 shadow-lg shadow-gray-600"
+    >
+      <img src={prod.image} alt={prod.name} className="h-30 mx-auto" />
       <figcaption className="flex flex-col">
         <pre className="text-center text-[0.8rem]">
           <b>&#8377;{prod.discountPrice}</b>
@@ -15,7 +16,7 @@ function ProductSlideCard({ prod }) {
           {prod.description}
         </p>
       </figcaption>
-    </div>
+    </Link>
   );
 }
 

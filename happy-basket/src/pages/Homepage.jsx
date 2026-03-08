@@ -1,4 +1,7 @@
 import Banners from "../components/Banners";
+import FloatingNav from "../components/FloatingNav";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 import ProductBoxGrid from "../components/ProductBoxGrid";
 import ProductSlideGrid from "../components/ProductSlideGrid";
 import { useData } from "../context/ApiDataProvider";
@@ -8,7 +11,8 @@ function Homepage() {
   const { data, loading, error } = useData();
 
   return (
-    <div>
+    <div className="bg-gray-200">
+      <Navbar data={data} />
       <Banners data={data} />
       <ProductSlideGrid
         data={data}
@@ -55,6 +59,8 @@ function Homepage() {
         category={"Cooking Essentials"}
         bgColor={"bg-yellow-300"}
       />
+      <FloatingNav />
+      <Footer />
     </div>
   );
 }
