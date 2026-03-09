@@ -5,14 +5,14 @@ import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 function Authpage() {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     //  absolute top-0 z-3
     <div className="bg-gray-300 absolute top-0">
       <div className="flex px-4 py-1 gap-3 mt-10">
-        <Link to={"/"} className="size-6">
-          <BiArrowBack className="mt-[0.2rem]" />
-        </Link>
+        <button onClick={() => navigate(-1)} className="size-6">
+          <BiArrowBack />
+        </button>
         <p className="text-[0.8rem] font-bold">My Account</p>
       </div>
       <div className="relative px-2 mt-3">

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { HiMiniMagnifyingGlass, HiOutlineHeart } from "react-icons/hi2";
 import { GrShareOption, GrBasket } from "react-icons/gr";
@@ -8,15 +8,19 @@ import { BsLightningFill } from "react-icons/bs";
 import { RiInboxUnarchiveLine } from "react-icons/ri";
 
 function Wishlistpage() {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col gap-1 bg-gray-200 ">
       {/* Back, Search, Cartlist */}
       <nav className="flex flex-col w-full bg-white fixed">
         <div className="flex justify-between px-4 py-1 gap-3 mt-10">
           <div className="flex min-w-[75%]">
-            <Link to={"/"} className="block size-8 p-2 my-auto rounded-full">
+            <button
+              onClick={() => navigate(-1)}
+              className="block size-8 p-2 my-auto rounded-full"
+            >
               <BiArrowBack className="my-auto" />
-            </Link>
+            </button>
             <h3 className="text[0.9rem] font-bold my-auto ml-[33%]">
               My Wishlist
             </h3>
@@ -29,7 +33,7 @@ function Wishlistpage() {
               <HiMiniMagnifyingGlass className="my-auto" />
             </Link>
             <Link
-              to={"/product"}
+              to={"/checkout"}
               className="block size-8 p-2 my-auto rounded-full"
             >
               <LuNotepadText className="my-auto" />
@@ -54,13 +58,25 @@ function Wishlistpage() {
               <del className="text-[0.7rem] text-gray-600">&#8377;32</del>
             </p>
           </figcaption>
-          <button className="w-full py-1 text-[0.7rem] font-bold rounded-md border">
-            Add to Cart
-          </button>
+          <button className="btnStyle">Add to Cart</button>
         </div>
-        <div className="h-70 shrink-0 border"></div>
-        <div className="h-70 shrink-0 border"></div>
-        <div className="h-70 shrink-0 border"></div>
+        {/* {product.map((prod) => {
+          return (
+            <div key={} className="h-70 p-1 shrink-0 bg-white shadow-gray-800">
+              <img src={prod.image} alt={prod.name} className="h-50 mx-auto" />
+              <figcaption className="flex flex-col items-center w-full border">
+                <p className="text-[0.7rem] line-clamp-1">{prod.description}</p>
+                <p className="text-[0.8rem] flex gap-2">
+                  <b>&#8377;{prod.discountPrice}</b>
+                  <del className="text-[0.7rem] text-gray-600">
+                    &#8377;{prod.price}
+                  </del>
+                </p>
+              </figcaption>
+              <button className="btnStyle">Add to Cart</button>
+            </div>
+          );
+        })} */}
         <div className="h-70 shrink-0 border"></div>
         <div className="h-70 shrink-0 border"></div>
         <div className="h-70 shrink-0 border"></div>

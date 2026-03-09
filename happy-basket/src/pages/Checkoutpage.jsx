@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiArrowBack, BiSolidHome, BiSolidDiscount } from "react-icons/bi";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
@@ -11,17 +11,18 @@ import { MdArrowRight } from "react-icons/md";
 import { TbArrowBadgeRightFilled } from "react-icons/tb";
 
 function Checkoutpage() {
-  const addr = "Sivajinagar, RoadNo. 4, Vadlapudi, Visakhapatnam, 530046";
   const [count, setCount] = useState(1);
+  const navigate = useNavigate();
+  const addr = "Sivajinagar, RoadNo. 4, Vadlapudi, Visakhapatnam, 530046";
   return (
-    // absolute left-0 right-0 top-0 
+    // absolute left-0 right-0 top-0
     <nav className="min-h-screen flex flex-col gap-1 bg-gray-300">
       {/* Address, Search and Share */}
       <div className="flex flex-col justify-between bg-white sticky top-0">
         <div className="flex px-4 py-1 gap-3 mt-10">
-          <Link to={"/"} className="block size-6 mt-3">
-            <BiArrowBack className="mt-[0.2rem]" />
-          </Link>
+          <button onClick={() => navigate(-1)} className="block size-6 mt-3">
+            <BiArrowBack />
+          </button>
           <div className="flex flex-col w-[70%]">
             <b className="flex text-sm">basket</b>
             <Link to={"/checkout"} className="flex gap-1">

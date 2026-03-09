@@ -15,7 +15,7 @@ function ProductSlideGrid({ data, category, bgColor }) {
             }
           })}
       </div>
-      <button className="ring-1 ring-green-300 rounded-md text-[0.7rem] flex justify-center mt-2 w-full py-1 ">
+      <button className="btnStyle">
         <b>View more products</b>
         <span>
           <SlArrowRight className="mt-1 ml-2" />

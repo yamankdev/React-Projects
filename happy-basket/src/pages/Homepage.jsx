@@ -9,6 +9,7 @@ import { SlArrowRight } from "react-icons/sl";
 
 function Homepage() {
   const { data, loading, error } = useData();
+  const user = localStorage.getItem("mobile");
 
   return (
     <div className="bg-gray-200">

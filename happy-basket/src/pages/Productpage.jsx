@@ -1,12 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { HiMiniMagnifyingGlass, HiOutlineHeart } from "react-icons/hi2";
 import { GrShareOption, GrBasket } from "react-icons/gr";
-import { SlArrowRight } from "react-icons/sl";
+import { SlArrowRight, SlArrowDown } from "react-icons/sl";
 import { BsLightningFill } from "react-icons/bs";
 import { RiInboxUnarchiveLine } from "react-icons/ri";
+import { useData } from "../context/ApiDataProvider";
+import { useEffect, useState } from "react";
+import ProductVarCard from "../components/ProductVarCard";
 
 function Productpage() {
+  const [product, setProduct] = useState([]);
+  const { id } = useParams();
+  const { data, loading, error } = useData();
+  // console.log(id);
+  // console.log(data.products);
+  useEffect(() => {
+    const productDetails = data.products.find((p) => p.id == id);
+    setProduct(productDetails);
+  }, []);
+  // console.log(product);
   return (
     // absolute left-0 right-0 top-0
     <div className="bg-gray-300 flex flex-col gap-1">
@@ -21,10 +34,12 @@ function Productpage() {
               <BiArrowBack className="my-auto" />
             </Link>
             <div className="flex flex-col text-[0.75rem] my-auto">
-              <p className="-mt-1 font-bold">Product name</p>
+              <p className="-mt-1 font-bold">{product.name}</p>
               <p>
-                &#8377;18.18
-                <del className="text-[0.6rem] text-gray-600">&#8377;30</del>
+                &#8377;{product.discountPrice}
+                <del className="text-[0.6rem] text-gray-600">
+                  &#8377;{product.price}
+                </del>
               </p>
             </div>
           </div>
@@ -55,26 +70,31 @@ function Productpage() {
         {/* Product image */}
         <div className="bg-gray-200 rounded-xl">
           <img
-            src="/AromaJoy RoomFreshenerGel.png"
-            alt="product name"
+            src={product.image}
+            alt={product.name}
             className="h-70 mx-auto mt-5 rounded-xl"
           />
         </div>
 
         {/* Product name and price */}
         <div className="flex flex-col gap-2 p-2 bg-white rounded-xl">
-          <h3 className="text-[0.9rem] font-semibold">Product name</h3>
-          <span className="flex text-[0.6rem] py-1 w-15 bg-linear-to-r from-green-300 to-white rounded-sm">
+          <h3 className="text-[0.9rem] font-semibold">{product.name}</h3>
+          <span className="flex text-[0.6rem] p-1 w-15 bg-linear-to-r from-green-300 to-white rounded-sm">
             <BsLightningFill className="size-2 my-auto" />
             <b>15 mins</b>
           </span>
-          <div className="flex gap-2 text-[0.9rem]">
-            <p>
-              <b>&#8377;18.18</b>
-              <del className="text-[0.7rem] text-gray-600">&#8377;32</del>
+          <div className="flex gap-5 text-[0.9rem]">
+            <p className="flex gap-1">
+              <b>&#8377;{product.discountPrice}</b>
+              <del className="text-[0.7rem] text-gray-600">
+                &#8377;{product.price}
+              </del>
             </p>
-            <b className="text-[0.7rem] mt-[0.2rem] text-green-700 bg-linear-to-r from-green-300 to-white rounded-sm">
-              24% OFF
+            <b className="text-[0.7rem] my-auto px-1 text-green-700 bg-linear-to-r from-green-300 to-white rounded-sm">
+              {Math.floor(
+                ((product.price - product.discountPrice) / product.price) * 100,
+              )}
+              % OFF
             </b>
           </div>
         </div>
@@ -84,61 +104,30 @@ function Productpage() {
           <h3 className="text-[0.9rem] font-semibold text-gray-600">
             Pack sizes:
           </h3>
-          <div className="flex flex-nowrap gap-2 overflow-x-auto">
-            <div className="flex flex-col items-center gap-1 w-[38%] shrink-0">
-              <span className="flex text-[0.6rem] w-15 bg-linear-to-r from-green-300 to-white rounded-sm">
-                <BsLightningFill className="size-2 my-auto" />
-                <b>15 mins</b>
-              </span>
-              <div className="w-full text-[0.6rem] text-center p-1 bg-green-200 border border-green-500 rounded-lg">
-                <p className="w-full bg-white rounded-sm">500g</p>
-                <p className="text-">
-                  <b>&#8377;18.18</b> (&#8377;0.13/g)
-                </p>
-                <p className="text-[0.5rem] text-green-800 font-bold">
-                  &#8377;32 24% OFF
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col items-center gap-1 w-[38%] shrink-0">
-              <span className="flex text-[0.6rem] w-15 bg-linear-to-r from-green-300 to-white rounded-sm">
-                <BsLightningFill className="size-2 my-auto" />
-                <b>15 mins</b>
-              </span>
-              <div className="w-full text-[0.6rem] text-center p-1 bg-green-200 border border-green-500 rounded-lg">
-                <p className="w-full bg-white rounded-sm">500g</p>
-                <p className="text-">
-                  <b>&#8377;18.18</b> (&#8377;0.13/g)
-                </p>
-                <p className="text-[0.5rem] text-green-800 font-bold">
-                  &#8377;32 24% OFF
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col items-center gap-1 w-[38%] shrink-0">
-              <span className="flex text-[0.6rem] w-15 bg-linear-to-r from-green-300 to-white rounded-sm">
-                <BsLightningFill className="size-2 my-auto" />
-                <b>15 mins</b>
-              </span>
-              <div className="w-full text-[0.6rem] text-center p-1 bg-green-200 border border-green-500 rounded-lg">
-                <p className="w-full bg-white rounded-sm">500g</p>
-                <p className="text-">
-                  <b>&#8377;18.18</b> (&#8377;0.13/g)
-                </p>
-                <p className="text-[0.5rem] text-green-800 font-bold">
-                  &#8377;32 24% OFF
-                </p>
-              </div>
-            </div>
-          </div>
+          <ProductVarCard id={id} product={product} />
         </div>
 
         {/* Product details button */}
         <div className="p-2 bg-white rounded-xl">
-          <button className="bg-linear-to-b from-blue-300 to-white rounded-md text-[0.8rem] text-blue-800 flex justify-center mt-2 w-full py-1 ">
+          <button className="bg-linear-to-b from-blue-300 to-white rounded-md text-[0.8rem] text-blue-800 flex justify-center mt-2 w-full py-1">
             <b>View products details</b>
-            <SlArrowRight className="my-auto ml-3" />
+            <SlArrowDown className="my-auto ml-3" />
           </button>
+          {/* <div className="py-2 mt-2 flex flex-col">
+            <div className="border rounded-xl h-20 p-2">
+              {product.map((prod) => {
+                return (
+                  <>
+                    <div className="flex flex-col text-[0.7rem] ">
+                      <h4 className="font-semibold">Product prop</h4>
+                      <p>prop value</p>
+                    </div>
+                    <hr className="px-3 my-2" />
+                  </>
+                );
+              })}
+            </div>
+          </div> */}
         </div>
 
         {/* View products of same brand */}

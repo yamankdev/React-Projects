@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function ProductSlideCard({ prod }) {
   return (
     <Link
-      to={"/product"}
+      to={`/product/${prod.id}`}
       className="w-30 p-2 shrink-0 shadow-lg shadow-gray-600"
     >
       <img src={prod.image} alt={prod.name} className="h-30 mx-auto" />
