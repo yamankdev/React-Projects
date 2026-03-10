@@ -1,7 +1,16 @@
 import { BsLightningFill } from "react-icons/bs";
+import { useData } from "../context/ApiDataProvider";
+import Loginpage from "../pages/Loginpage";
 
-function ProductVarCard({ id, product }) {
-  console.log(product);
+function ProductVarCard({ id }) {
+  const { data, loading, error } = useData();
+  // console.log(id);
+
+  const product = data.products.filter((prod) => {
+    return prod.id === id;
+  });
+  // console.log(product);
+
   const finalPrice = (vrWt, dp) => {
     let baseWt = parseInt(product.unit);
     let pricePerUnit = dp / baseWt;
@@ -19,7 +28,7 @@ function ProductVarCard({ id, product }) {
 
   return (
     <div className="w-full flex flex-nowrap gap-2 overflow-x-auto">
-      {product.variant.map((v, index) => {
+      {product[0].variant.map((v, index) => {
         return (
           <div
             key={`${id}.${index}`}

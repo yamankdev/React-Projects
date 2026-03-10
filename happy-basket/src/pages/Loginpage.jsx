@@ -60,7 +60,7 @@ function Loginpage() {
           onSubmit={handleSubmit}
           className=" relative flex flex-col w-[95%] mx-auto mt-3 px-3 py-4 rounded-xl bg-white"
         >
-          {/* Share number to login */}
+          {/* Share mobile to login */}
           <div className="flex flex-col gap-2 justify-between">
             <h2 className="text-2 font-bold">
               Share your number to get started

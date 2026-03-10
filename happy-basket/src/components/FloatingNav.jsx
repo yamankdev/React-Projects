@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { TbHome, TbCategory, TbRosetteDiscount } from "react-icons/tb";
-import { HiOutlineHeart } from "react-icons/hi2";
+
+import { TbHome, TbCategory } from "react-icons/tb";
+import { TbHeart } from "react-icons/tb";
 
 function FloatingNav() {
   return (
@@ -21,7 +22,7 @@ function FloatingNav() {
           to={"/wish"}
           className="w-[33%] py-1 flex flex-col justify-center items-center rounded-full"
         >
-          <HiOutlineHeart className="size-5" />
+          <TbHeart className="size-5" />
           <span className="text-[0.7rem] -mt-1">Wishlist</span>
         </NavLink>
       </div>

@@ -8,11 +8,18 @@ import { RiInboxUnarchiveLine } from "react-icons/ri";
 import { useData } from "../context/ApiDataProvider";
 import { useEffect, useState } from "react";
 import ProductVarCard from "../components/ProductVarCard";
+import { useCart } from "../context/CartContext";
 
 function Productpage() {
   const [product, setProduct] = useState([]);
-  const { id } = useParams();
   const { data, loading, error } = useData();
+  const { id } = useParams();
+  const { state, dispatch } = useCart();
+
+  const totalItems = state.cartItems.reduce(
+    (sum, item) => sum + item.quantity,
+    0,
+  );
   // console.log(id);
   // console.log(data.products);
   useEffect(() => {
@@ -20,8 +27,16 @@ function Productpage() {
     setProduct(productDetails);
   }, []);
   // console.log(product);
+
+  const handleAddToCart = () => {
+    dispatch({ type: "ADD_TO_CART", payload: product });
+  };
+
+  // const handleAddToWishlist = () => {
+  //   dispatch({ type: "ADD_TO_WISH", payload: product });
+  // };
+
   return (
-    // absolute left-0 right-0 top-0
     <div className="bg-gray-300 flex flex-col gap-1">
       {/* Back, Search, Wishlist and Share */}
       <nav className="flex flex-col  w-full bg-transparent hover:bg-white z-4 fixed">
@@ -43,18 +58,12 @@ function Productpage() {
               </p>
             </div>
           </div>
-          <div className="flex gap-1">
+          <div className="flex gap-2">
             <Link
               to={"/product"}
               className="block text-white size-8 p-2 my-auto rounded-full bg-black"
             >
               <HiMiniMagnifyingGlass className="my-auto" />
-            </Link>
-            <Link
-              to={"/wish"}
-              className="block text-white size-8 p-2 my-auto rounded-full bg-black"
-            >
-              <HiOutlineHeart className="my-auto" />
             </Link>
             <Link
               to={"/product"}
@@ -68,12 +77,18 @@ function Productpage() {
 
       <div className="absolute left-0 top-0 right-0 flex flex-col gap-3 px-2 bg-gray-300">
         {/* Product image */}
-        <div className="bg-gray-200 rounded-xl">
+        <div className="relative bg-gray-200 rounded-xl">
           <img
             src={product.image}
             alt={product.name}
             className="h-70 mx-auto mt-5 rounded-xl"
           />
+          <button
+            // onClick={handleAddToWishlist}
+            className="absolute bottom-3 right-3 block text-white size-8 p-2 my-auto rounded-full bg-black"
+          >
+            <HiOutlineHeart className="my-auto" />
+          </button>
         </div>
 
         {/* Product name and price */}
@@ -104,7 +119,7 @@ function Productpage() {
           <h3 className="text-[0.9rem] font-semibold text-gray-600">
             Pack sizes:
           </h3>
-          <ProductVarCard id={id} product={product} />
+          <ProductVarCard id={id} />
         </div>
 
         {/* Product details button */}
@@ -157,17 +172,19 @@ function Productpage() {
             <div className="flex gap-1">
               <GrBasket className="size-3 my-auto" />
               <p className="text-[0.8rem] font-bold">Basket</p>
-              <p className="text-[0.7rem] text-white size-4 px-1 my-auto rounded-full bg-black">
-                1
-              </p>
+              {totalItems > 0 && (
+                <span className="text-[0.7rem] text-white size-4 px-1 my-auto rounded-full bg-black">
+                  {totalItems}
+                </span>
+              )}
             </div>
           </Link>
-          <Link
-            to={"/checkout"}
-            className="flex justify-center items-center px-2 text-white bg-green-700 w-[50%] rounded-md"
+          <button
+            onClick={handleAddToCart}
+            className="flex justify-center items-center px-2 text-white bg-green-700 active:bg-green-900 w-[50%] rounded-md"
           >
             <p className="text-[0.8rem] font-bold">Add</p>
-          </Link>
+          </button>
         </div>
       </div>
     </div>
