@@ -1,16 +1,19 @@
 import Searchbar from "./Searchbar";
 import NavMenubar from "./NavMenubar";
 import { Link } from "react-router-dom";
-import { useCart } from "../context/CartContext";
 
 import { BsLightningFill } from "react-icons/bs";
 import { TiLocation, TiArrowSortedDown } from "react-icons/ti";
 import { LuUserRound, LuNotepadText } from "react-icons/lu";
+import { useUserData } from "../context/UserContext";
+// import { useCartWishlist } from "../context/CartWishlistContext";
 
 function Navbar({ data }) {
-  // const { data, loading, error } = useData();
-  const { state } = useCart();
-  const totalItems = state.cartItems.reduce(
+  // const { state } = useCartWishlist();
+  const { state } = useUserData();
+
+  const currentUser = state.currentUser;
+  const totalItems = currentUser.cart.reduce(
     (sum, item) => sum + item.quantity,
     0,
   );

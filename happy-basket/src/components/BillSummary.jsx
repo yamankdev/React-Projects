@@ -1,18 +1,20 @@
-import { useCart } from "../context/CartContext";
+import { useUserData } from "../context/UserContext";
+
 import { TbReceiptFilled } from "react-icons/tb";
 
 function BillSummary() {
-  const { state } = useCart();
+  const { state } = useUserData();
 
-  const totalItems = state.cartItems.reduce(
+  const currentUser = state.currentUser;
+  const totalItems = currentUser.cart.reduce(
     (sum, item) => sum + item.quantity,
     0,
   );
-  const subTotalPrice = state.cartItems.reduce(
+  const subTotalPrice = currentUser.cart.reduce(
     (sum, item) => item.quantity * item.price + sum,
     0,
   );
-  const subTotalDiscountedPrice = state.cartItems.reduce(
+  const subTotalDiscountedPrice = currentUser.cart.reduce(
     (sum, item) => item.quantity * item.discountPrice + sum,
     0,
   );

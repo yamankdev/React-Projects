@@ -1,44 +1,46 @@
 import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import ProductVarCard from "../components/ProductVarCard";
+import { useData } from "../context/ApiDataProvider";
+
 import { BiArrowBack } from "react-icons/bi";
 import { HiMiniMagnifyingGlass, HiOutlineHeart } from "react-icons/hi2";
 import { GrShareOption, GrBasket } from "react-icons/gr";
 import { SlArrowRight, SlArrowDown } from "react-icons/sl";
 import { BsLightningFill } from "react-icons/bs";
-import { RiInboxUnarchiveLine } from "react-icons/ri";
-import { useData } from "../context/ApiDataProvider";
-import { useEffect, useState } from "react";
-import ProductVarCard from "../components/ProductVarCard";
-import { useCart } from "../context/CartContext";
+import {
+  RiInboxUnarchiveLine,
+  RiHeart3Fill,
+  RiHeart3Line,
+} from "react-icons/ri";
+import { useUserData } from "../context/UserContext";
 
 function Productpage() {
-  const [product, setProduct] = useState([]);
   const { data, loading, error } = useData();
+  const [product, setProduct] = useState([]);
   const { id } = useParams();
-  const { state, dispatch } = useCart();
+  const { state, dispatch } = useUserData();
 
-  const totalItems = state.cartItems.reduce(
+  const currentUser = state.currentUser;
+  // console.log(state.currentUser.cart);
+
+  const totalItems = currentUser.cart.reduce(
     (sum, item) => sum + item.quantity,
     0,
   );
-  // console.log(id);
-  // console.log(data.products);
+
   useEffect(() => {
-    const productDetails = data.products.find((p) => p.id == id);
+    const productDetails = data.products.find((p) => p.id === id);
     setProduct(productDetails);
   }, []);
-  // console.log(product);
 
-  const handleAddToCart = () => {
-    dispatch({ type: "ADD_TO_CART", payload: product });
-  };
-
-  // const handleAddToWishlist = () => {
-  //   dispatch({ type: "ADD_TO_WISH", payload: product });
-  // };
+  const isInWishlist = currentUser.wishlist.some((p) => {
+    return p.id === id;
+  });
 
   return (
     <div className="bg-gray-300 flex flex-col gap-1">
-      {/* Back, Search, Wishlist and Share */}
+      {/* Back, Search and Share */}
       <nav className="flex flex-col  w-full bg-transparent hover:bg-white z-4 fixed">
         <div className="flex justify-between px-4 py-1 gap-3 mt-10">
           <div className="flex gap-1">
@@ -58,13 +60,25 @@ function Productpage() {
               </p>
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-1">
             <Link
               to={"/product"}
               className="block text-white size-8 p-2 my-auto rounded-full bg-black"
             >
               <HiMiniMagnifyingGlass className="my-auto" />
             </Link>
+            <button
+              onClick={() =>
+                dispatch({ type: "TOGGLE_WISHLIST", payload: product })
+              }
+              className="block text-white size-8 p-2 my-auto rounded-full bg-black"
+            >
+              {isInWishlist ? (
+                <RiHeart3Fill className="my-auto text-white" />
+              ) : (
+                <RiHeart3Line className="my-auto text-white" />
+              )}
+            </button>
             <Link
               to={"/product"}
               className="block text-white size-8 p-2 my-auto rounded-full bg-black"
@@ -83,12 +97,6 @@ function Productpage() {
             alt={product.name}
             className="h-70 mx-auto mt-5 rounded-xl"
           />
-          <button
-            // onClick={handleAddToWishlist}
-            className="absolute bottom-3 right-3 block text-white size-8 p-2 my-auto rounded-full bg-black"
-          >
-            <HiOutlineHeart className="my-auto" />
-          </button>
         </div>
 
         {/* Product name and price */}
@@ -180,7 +188,7 @@ function Productpage() {
             </div>
           </Link>
           <button
-            onClick={handleAddToCart}
+            onClick={() => dispatch({ type: "ADD_TO_CART", payload: product })}
             className="flex justify-center items-center px-2 text-white bg-green-700 active:bg-green-900 w-[50%] rounded-md"
           >
             <p className="text-[0.8rem] font-bold">Add</p>

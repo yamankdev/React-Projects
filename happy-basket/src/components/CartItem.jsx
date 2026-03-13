@@ -1,8 +1,9 @@
-import { useCart } from "../context/CartContext";
+import { useUserData } from "../context/UserContext";
+
 import { MdOutlineDeleteForever } from "react-icons/md";
 
 function CartItem({ item }) {
-  const { dispatch } = useCart();
+  const { dispatch } = useUserData();
 
   const totalItemPrice = item.quantity * item.price;
   const totalItemDiscountedPrice = item.quantity * item.discountPrice;

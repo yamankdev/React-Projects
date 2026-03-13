@@ -1,12 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-function OtpInput({
-  mobile,
-  length = 6,
-  message,
-  handleVerify = (combinedOtp) => {},
-}) {
+function OtpInput({ mobile, length = 6, handleVerify = (combinedOtp) => {} }) {
   const [userOtp, setUserOtp] = useState(new Array(length).fill(""));
   const inputRef = useRef([]);
   //   console.log(otp);
@@ -55,7 +49,7 @@ function OtpInput({
 
   return (
     <div className="relative flex flex-col w-[95%] mx-auto mt-3 px-3 py-4 rounded-xl bg-white">
-      {/* Share number to login */}
+      {/* Enter the OTP to login */}
       <div className="flex flex-col gap-3">
         <h2 className="text-2 font-bold w-full mb-10">
           Enter OTP sent to +91 {mobile}
@@ -87,7 +81,7 @@ function OtpInput({
 
       {/* Button for generating OTP */}
       <button
-        type="submit"
+        // type="submit"
         className="w-full py-2 mt-76 ring-1 ring-green-300 rounded-sm text-[0.8rem] text-white flex justify-center bg-green-600 "
       >
         <b>SUBMIT</b>

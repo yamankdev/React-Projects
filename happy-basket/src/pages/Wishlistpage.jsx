@@ -1,25 +1,23 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useCart } from "../context/CartContext";
+import WishlistCard from "../components/WishlistCard";
 
 import { BiArrowBack } from "react-icons/bi";
 import { HiMiniMagnifyingGlass, HiOutlineHeart } from "react-icons/hi2";
 import { LuNotepadText } from "react-icons/lu";
-import { MdOutlineDeleteForever } from "react-icons/md";
+import { TbArrowBadgeRightFilled } from "react-icons/tb";
+import { useUserData } from "../context/UserContext";
 
 function Wishlistpage() {
   const navigate = useNavigate();
-  const { state, dispatch } = useCart();
+  const { state } = useUserData();
 
-  const totalItems = state.cartItems.reduce(
+  const currentUser = state.currentUser;
+
+  const totalItems = currentUser.cart.reduce(
     (sum, item) => sum + item.quantity,
     0,
   );
 
-  const handleAddToCart = () => {
-    dispatch({ type: "ADD_TO_CART", payload: product });
-  };
-
-  const wishItems = 1;
   return (
     <div className="flex flex-col gap-1 bg-gray-200 ">
       {/* Back, Search, Cartlist */}
@@ -60,62 +58,23 @@ function Wishlistpage() {
         </div>
       </nav>
 
-      {!wishItems ? (
+      {currentUser.wishlist.length === 0 ? (
         // If wishlist is empty
         <div className="grid h-screen place-items-center px-2 py-3">
           <h1 className="text-xl font-semibold">Your hbWishlist is empty</h1>
+          <div className="w-full px-2 py-2 z-5 bg-white fixed bottom-0">
+            <Link
+              to={"/"}
+              className="flex justify-center gap-3 h-10 text-white bg-green-700 rounded-lg"
+            >
+              <p className="my-auto">Go to home</p>
+              <TbArrowBadgeRightFilled className="size-6 mt-2" />
+            </Link>
+          </div>
         </div>
       ) : (
         // If wishlist is not empty
-        <div className="grid grid-cols-2 gap-3 p-2 mt-22">
-          <div className="relative h-70 p-1 shrink-0 bg-white shadow-gray-800">
-            <img
-              src="/AromaJoy RoomFreshenerGel.png"
-              alt="product name"
-              className="h-50 mx-auto"
-            />
-            <div
-              className="absolute flex justify-center size-6 pt-1 top-2 right-2 rounded-full active:bg-red-500"
-              // onClick={() =>
-              //   dispatch({ type: "REMOVE_FROM_CART", payload: item.id })
-              // }
-            >
-              <MdOutlineDeleteForever className="text-red-600 active:text-white" />
-            </div>
-            <figcaption className="flex flex-col items-center w-full border">
-              <p className="text-[0.7rem] line-clamp-1">
-                Product Description lknslcns ldiknvlknv sfcalsjnlsk
-              </p>
-              <p className="text-[0.8rem] flex gap-2">
-                <b>&#8377;18.18</b>
-                <del className="text-[0.7rem] text-gray-600">&#8377;32</del>
-              </p>
-            </figcaption>
-            <button onClick={handleAddToCart} className="btnStyle">
-              Add to Cart
-            </button>
-          </div>
-          {/* {product.map((prod) => {
-          return (
-            <div key={} className="h-70 p-1 shrink-0 bg-white shadow-gray-800">
-              <img src={prod.image} alt={prod.name} className="h-50 mx-auto" />
-              <figcaption className="flex flex-col items-center w-full border">
-                <p className="text-[0.7rem] line-clamp-1">{prod.description}</p>
-                <p className="text-[0.8rem] flex gap-2">
-                  <b>&#8377;{prod.discountPrice}</b>
-                  <del className="text-[0.7rem] text-gray-600">
-                    &#8377;{prod.price}
-                  </del>
-                </p>
-              </figcaption>
-              <button className="btnStyle">Add to Cart</button>
-            </div>
-          );
-        })} */}
-          <div className="h-70 shrink-0 border"></div>
-          <div className="h-70 shrink-0 border"></div>
-          <div className="h-70 shrink-0 border"></div>
-        </div>
+        <WishlistCard wishlist={currentUser.wishlist} />
       )}
     </div>
   );

@@ -1,14 +1,16 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { useState } from "react";
 import OtpInput from "../components/OtpInput";
+import { useUserData } from "../context/UserContext";
 
 function Loginpage() {
   const navigate = useNavigate();
   const [generatedOtp, setGeneratedOtp] = useState("");
-  const [mobile, setMobile] = useState();
   const [showOtpInput, setShowOtpInput] = useState(false);
   const [message, setMessage] = useState("");
+  const [mobile, setMobile] = useState();
+  const { dispatch } = useUserData();
 
   const generateMockOtp = () => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
@@ -21,9 +23,13 @@ function Loginpage() {
 
     const regex = /[^0-9]/g;
     if (mobile.length != 10 || regex.test(mobile)) {
-      alert("Please enter a valid mobile number.");
+      alert("Please enter a valid phone number.");
       return;
     }
+    // For testing purpose
+    // dispatch({ type: "LOGIN_USER", payload: mobile });
+    // navigate("/");
+    //
     setMessage("Mock OTP generated (shown below for demo)");
     console.log("Mock OTP generated (shown below for demo)");
     generateMockOtp();
@@ -32,18 +38,19 @@ function Loginpage() {
 
   const handleVerify = (userOtp) => {
     if (userOtp === generatedOtp) {
+      dispatch({ type: "USER_LOGIN", payload: mobile });
+
       setMessage("OTP verified successfully ✅");
-      console.log("OTP verified successfully ✅");
-      localStorage.setItem("mobile", mobile);
+      console.log(message);
       navigate("/");
     } else {
       setMessage("Invalid OTP ❌");
-      console.log("Invalid OTP ❌");
+      console.log(message);
+      return;
     }
   };
 
   return (
-    // absolute top-0 left-0 right-0 bottom-0 z-3
     <div className="bg-black/80 pb-3">
       {/* Back button */}
       <div className="flex w-full px-2 py-1 gap-3 text-white">
@@ -60,16 +67,16 @@ function Loginpage() {
           onSubmit={handleSubmit}
           className=" relative flex flex-col w-[95%] mx-auto mt-3 px-3 py-4 rounded-xl bg-white"
         >
-          {/* Share mobile to login */}
+          {/* Share Phone Number to login */}
           <div className="flex flex-col gap-2 justify-between">
             <h2 className="text-2 font-bold">
-              Share your number to get started
+              Share your mboile number to get started
             </h2>
             <input
               type="text"
               name="mobile"
               placeholder="Enter mobile number"
-              input={mobile}
+              vlaue={mobile}
               onChange={(e) => setMobile(e.target.value)}
               className="outline-none border border-gray-400 placeholder-gray-600 placeholder:text-[0.7rem] text-[0.9rem] p-2 w-full rounded-sm"
             />

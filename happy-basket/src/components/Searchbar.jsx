@@ -7,6 +7,8 @@ function Searchbar() {
       <HiMiniMagnifyingGlass className="text-gray-800 mr-2" size={20} />
       <input
         type="text"
+        name="search"
+        id="searchBar"
         // value={query}
         // onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for fruits, vegetables, groceries..."
