@@ -24,7 +24,7 @@ function UserReducer(state, action) {
 
       if (userExists) {
         return {
-          ...state,
+          users: state.users,
           currentUser: userExists,
         };
       }
@@ -49,7 +49,51 @@ function UserReducer(state, action) {
       // const mobile = action.payload;
       return {
         users: state.users,
+        // currentUser: [],
         currentUser: dataFormat,
+      };
+    }
+
+    case "USER_PROFILE_UPDATE": {
+      const user = action.payload;
+      const updatedUser = {
+        ...state.currentUser,
+        name: user.name,
+        mobile: user.mobile,
+        email: user.email,
+      };
+      return {
+        users: updatedUsers(state.users, updatedUser),
+        currentUser: updatedUser,
+      };
+    }
+
+    case "ADD_ADDRESS": {
+      const addr = action.payload;
+      const newAddress = {
+        id: `addr_${addr.mobile}`,
+        name: addr.name,
+        mobile: addr.mobile,
+        house: addr.house,
+        area: addr.area,
+        landmark: addr.landmark,
+        city: addr.city,
+        state: addr.state,
+        pincode: addr.pincode,
+        addressType: addr.addressType,
+        isDefault: addr.isDefault,
+      };
+      let updatedAddresses = [...state.currentUser.addresses, newAddress];
+      console.log(updatedAddresses);
+
+      let updatedUser = {
+        ...state.currentUser,
+        addresses: updatedAddresses,
+      };
+
+      return {
+        users: updatedUsers(state.users, updatedUser),
+        currentUser: updatedUser,
       };
     }
 

@@ -9,6 +9,9 @@ import Errorpage from "./pages/Errorpage";
 import Wishlistpage from "./pages/Wishlistpage";
 
 import ApiDataProvider from "./context/ApiDataProvider";
+import Profilepage from "./pages/Profilepage";
+import Addresspage from "./pages/Addresspage";
+import ViewProductspage from "./pages/ViewProductspage";
 
 function App() {
   return (
@@ -17,9 +20,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />}></Route>
           <Route path="/auth" element={<Authpage />}></Route>
+          <Route path="/profile" element={<Profilepage />}></Route>
+          <Route path="/address" element={<Addresspage />}></Route>
           <Route path="/login" element={<Loginpage />}></Route>
           <Route path="/checkout" element={<Checkoutpage />}></Route>
           <Route path="/product/:id" element={<Productpage />}></Route>
+          <Route path="/catProducts" element={<ViewProductspage />}></Route>
           <Route path="/wish" element={<Wishlistpage />}></Route>
           <Route path="*" element={<Errorpage />}></Route>
         </Routes>

@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
-import { BiArrowBack } from "react-icons/bi";
-import { SlArrowRight } from "react-icons/sl";
 import { useUserData } from "../context/UserContext";
 
+import { BiArrowBack } from "react-icons/bi";
+import { SlArrowRight } from "react-icons/sl";
 import { FaXTwitter } from "react-icons/fa6";
 import { TiPen } from "react-icons/ti";
 import { VscDeviceMobile, VscMail } from "react-icons/vsc";
@@ -24,7 +24,11 @@ function Authpage() {
   const navigate = useNavigate();
   const { state, dispatch } = useUserData();
 
-  const isUserLoggedIn = state.currentUser.mobile;
+  const currentUser = state.currentUser;
+  const isUserLoggedIn = currentUser.mobile;
+
+  // For test purpose only
+  const mobile = currentUser.mobile ? currentUser.mobile : 9692067827;
 
   const removeUser = () => {
     dispatch({ type: "USER_LOGOUT" });
@@ -52,7 +56,7 @@ function Authpage() {
                   Get exclusive offers and discounts on every order. Join now!
                 </p>
               </div>
-              <Link
+              {/* <Link
                 to={"/login"}
                 className="flex justify-between py-2 px-2 mb-1 text-white w-full "
               >
@@ -62,7 +66,20 @@ function Authpage() {
                 <span>
                   <SlArrowRight className="mt-[0.15rem]" />
                 </span>
-              </Link>
+              </Link> */}
+              <button
+                onClick={() =>
+                  dispatch({ type: "USER_LOGIN", payload: mobile })
+                }
+                className="flex justify-between py-2 px-2 mb-1 text-white w-full "
+              >
+                <span className="text-[0.8rem] font-bold">
+                  Log In / Sign up
+                </span>
+                <span>
+                  <SlArrowRight className="mt-[0.15rem]" />
+                </span>
+              </button>
             </div>
           ) : (
             // If user loggedIn
@@ -71,9 +88,14 @@ function Authpage() {
                 <div className="flex justify-between">
                   <div className="flex gap-2">
                     <FaUserCircle className="size-6 bg-black text-white border-2 rounded-full" />
-                    <h2 className="text-2 font-bold my-auto">Username</h2>
+                    <h2 className="text-2 font-bold my-auto">
+                      {currentUser.name}
+                    </h2>
                   </div>
-                  <Link className="p-1 border border-gray-400 rounded-sm">
+                  <Link
+                    to={"/profile"}
+                    className="p-1 border border-gray-400 rounded-sm"
+                  >
                     <TiPen className="text-green-700" />
                   </Link>
                 </div>
@@ -81,38 +103,47 @@ function Authpage() {
                   <p className="flex gap-2 text-[0.8rem] leading-4 text-gray-700">
                     <VscDeviceMobile />
                     <span className="text-[0.7rem] -mt-[0.1rem]">
-                      9123456780
+                      +91 {currentUser.mobile}
                     </span>
                   </p>
                   <p className="flex gap-2 text-[0.8rem] leading-4 text-gray-700">
                     <VscMail />
                     <span className="text-[0.7rem] -mt-[0.1rem]">
-                      abc@gmail.com
+                      {currentUser.email || "-"}
                     </span>
                   </p>
                 </div>
               </div>
               <div className="flex justify-around py-2 px-2 mb-1 text-white w-full ">
-                <Link className="flex flex-col items-center">
+                <button
+                  onClick={() => navigate("/checkout")}
+                  className="flex flex-col items-center"
+                >
                   <span className=" p-2 rounded-full bg-gray-300">
                     <PiNotepadFill className="text-black size-5" />
                   </span>
                   <p className="text-black text-[0.6rem] text-bold">Orders</p>
-                </Link>
-                <Link className="flex flex-col items-center">
+                </button>
+                <button
+                  onClick={() => navigate("/auth")}
+                  className="flex flex-col items-center"
+                >
                   <span className=" p-2 rounded-full bg-gray-300">
                     <PiWalletFill className="text-black size-5" />
                   </span>
                   <p className="text-black text-[0.6rem] text-bold">
                     &#8377; 0
                   </p>
-                </Link>
-                <Link className="flex flex-col items-center">
+                </button>
+                <button
+                  onClick={() => navigate("/address")}
+                  className="flex flex-col items-center"
+                >
                   <span className=" p-2 rounded-full bg-gray-300">
                     <PiAddressBookFill className="text-black size-5" />
                   </span>
                   <p className="text-black text-[0.6rem] text-bold">Address</p>
-                </Link>
+                </button>
               </div>
             </div>
           )}

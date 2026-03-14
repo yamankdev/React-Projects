@@ -27,7 +27,7 @@ function Loginpage() {
       return;
     }
     // For testing purpose
-    // dispatch({ type: "LOGIN_USER", payload: mobile });
+    // dispatch({ type: "USER_LOGIN", payload: mobile });
     // navigate("/");
     //
     setMessage("Mock OTP generated (shown below for demo)");
