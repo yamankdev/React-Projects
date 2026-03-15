@@ -30,6 +30,11 @@ function Authpage() {
   // For test purpose only
   const mobile = currentUser.mobile ? currentUser.mobile : 9692067827;
 
+  const totalItems = currentUser.cart.reduce(
+    (sum, item) => sum + item.quantity,
+    0,
+  );
+
   const removeUser = () => {
     dispatch({ type: "USER_LOGOUT" });
     console.log("Logout successfully ✅");
@@ -41,9 +46,9 @@ function Authpage() {
     <div className="relative">
       <div className="bg-gray-300 absolute h-screen top-0 left-0 right-0">
         <div className="flex px-4 py-1 gap-3 mt-10">
-          <button onClick={() => navigate(-1)} className="size-6">
+          <Link to={"/"} className="size-6">
             <BiArrowBack />
-          </button>
+          </Link>
           <p className="text-[0.8rem] font-bold">My Account</p>
         </div>
         <div className="relative px-2 mt-3">
@@ -119,8 +124,13 @@ function Authpage() {
                   onClick={() => navigate("/checkout")}
                   className="flex flex-col items-center"
                 >
-                  <span className=" p-2 rounded-full bg-gray-300">
+                  <span className="relative p-2 rounded-full bg-gray-300">
                     <PiNotepadFill className="text-black size-5" />
+                    {totalItems > 0 && (
+                      <div className="absolute top-2 left-4 bg-red-600 text-white rounded-full text-[0.6rem] px-1">
+                        {totalItems}
+                      </div>
+                    )}
                   </span>
                   <p className="text-black text-[0.6rem] text-bold">Orders</p>
                 </button>

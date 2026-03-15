@@ -37,12 +37,9 @@ function Addresspage() {
           </div>
           {!page ? (
             // For search purpose
-            <form
-              // onSubmit={handleSubmit}
-              className=" relative flex flex-col w-[95%] mx-auto mt-3 px-3 py-4 min-h-130 rounded-xl bg-white"
-            >
+            <div className=" relative flex flex-col w-[95%] mx-auto mt-3 px-3 py-4 min-h-130 rounded-xl bg-white">
               {/* Search location using input and map */}
-              <div className="flex flex-col gap-2 justify-between">
+              <form className="flex flex-col gap-2 justify-between">
                 <input
                   type="text"
                   name="location"
@@ -57,7 +54,7 @@ function Addresspage() {
                   <MdMyLocation className="size-5" />
                   <span className="font-bold">Use current location</span>
                 </button>
-              </div>
+              </form>
 
               {/* Add Address */}
               <div className="flex justify-between items-center py-1 text-[0.8rem] font-semibold">
@@ -81,7 +78,7 @@ function Addresspage() {
                   <AddressCard addresses={currentUser.addresses} />
                 )}
               </div>
-            </form>
+            </div>
           ) : (
             <AddressInput handlePage={handlePage} />
           )}

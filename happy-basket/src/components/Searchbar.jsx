@@ -3,8 +3,8 @@ import { GrMicrophone } from "react-icons/gr";
 
 function Searchbar() {
   return (
-    <div className="relative flex items-center w-full px-2 bg-white rounded-full">
-      <HiMiniMagnifyingGlass className="text-gray-800 mr-2" size={20} />
+    <div className="relative flex items-center w-full lg:w-[50%] px-2 bg-white lg:border lg:border-gray-400 rounded-full lg:rounded-lg">
+      <HiMiniMagnifyingGlass className="text-gray-800 mr-2" size={17} />
       <input
         type="text"
         name="search"
@@ -18,7 +18,7 @@ function Searchbar() {
         // type="submit"
         className=" size-10 -mr-2 flex justify-center items-center rounded-full"
       >
-        <GrMicrophone className="text-gray-800" size={18} />
+        <GrMicrophone className="text-gray-800" size={15} />
       </button>
     </div>
   );

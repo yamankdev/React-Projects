@@ -5,7 +5,7 @@ import { TbHeart } from "react-icons/tb";
 
 function FloatingNav() {
   return (
-    <div className="w-[84%] fixed bottom-2 right-[8%] left-[8%] z-2 ring-1 ring-stone-500 bg-white rounded-full">
+    <div className="w-[84%] lg:hidden fixed bottom-2 right-[8%] left-[8%] z-2 ring-1 ring-stone-500 bg-white rounded-full">
       <div className="flex p-1">
         <NavLink
           to={"/"}

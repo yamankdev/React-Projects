@@ -112,7 +112,7 @@ function AddressInput({ handlePage = (pageValue) => {} }) {
               onChange={handleChange}
               className="border rounded-md w-15 border-gray-400"
             >
-              <option value="other" selected>
+              <option value="other" defaultValue={"other"}>
                 Other
               </option>
               <option value="home">Home</option>
@@ -128,10 +128,10 @@ function AddressInput({ handlePage = (pageValue) => {} }) {
               onChange={handleChange}
               className="border rounded-md w-15 border-gray-400"
             >
-              <option value="true">True</option>
-              <option value="false" selected>
+              <option value="false" defaultValue={"false"}>
                 False
               </option>
+              <option value="true">True</option>
             </select>
           </div>
         </div>

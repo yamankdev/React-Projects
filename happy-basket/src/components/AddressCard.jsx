@@ -21,7 +21,10 @@ function AddressCard({ addresses }) {
         } = addr;
 
         return (
-          <div className="flex justify-between p-2 border border-gray-400 rounded-lg mb-2">
+          <div
+            key={`${name}_${pincode}`}
+            className="flex justify-between p-2 border border-gray-400 rounded-lg mb-2"
+          >
             <div className="flex gap-2 items-start">
               <span className="p-2 bg-green-200 rounded-md mt-1">
                 {addressType == "home" ? (
