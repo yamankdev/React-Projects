@@ -1,14 +1,16 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
-import Loadingpage from "../pages/Loadingpage";
+import Loadingpage from "../pages/LoadingPage";
 
 const ApiContext = createContext();
 
 function ApiDataProvider({ children }) {
   // optional loading state
   const [loading, setLoading] = useState(true);
+
   // optional error state
   const [error, setError] = useState(null);
+
   // state to store API response
   const [data, setData] = useState({
     products: [],
@@ -19,9 +21,11 @@ function ApiDataProvider({ children }) {
     monthlyPromotions: [],
   });
 
+  // URL to get the data for the project
   const url =
     "https://raw.githubusercontent.com/yamankdev/mock-data-hub/refs/heads/main/data.json";
 
+  // Fetching data from the URL
   const fetchedApiData = async () => {
     try {
       const response = await axios.get(url);
@@ -47,10 +51,11 @@ function ApiDataProvider({ children }) {
   );
 }
 
-export const useData = () => {
+// Hook to use ApiData in the project
+export const useApiData = () => {
   const context = useContext(ApiContext);
   if (!context) {
-    throw new Error("useData must be used inside DataProvider");
+    throw new Error("useApiData must be used inside ApiDataProvider");
   }
   return context;
 };
