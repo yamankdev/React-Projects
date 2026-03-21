@@ -30,6 +30,10 @@ function DesktopLoginModal({ isOpen, onClose, length = 6 }) {
     };
   }, []);
 
+  useEffect(() => {
+    if (inputRef.current[0]) inputRef.current[0].focus();
+  }, []);
+
   if (!isOpen) return null;
 
   const generateMockOtp = () => {
@@ -39,10 +43,6 @@ function DesktopLoginModal({ isOpen, onClose, length = 6 }) {
   };
 
   // setMobile("9692067827");
-
-  useEffect(() => {
-    if (inputRef.current[0]) inputRef.current[0].focus();
-  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

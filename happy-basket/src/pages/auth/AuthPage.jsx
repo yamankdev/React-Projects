@@ -15,7 +15,7 @@ import {
 } from "react-icons/pi";
 import { FaUserCircle } from "react-icons/fa";
 
-function Authpage() {
+function AuthPage() {
   const navigate = useNavigate();
   const { state, dispatch } = useUserData();
 
@@ -28,10 +28,10 @@ function Authpage() {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const hbExplore = [
-    { alt: "hbWellness", text: "hbWellness"},
-    { alt: "hbLifestyle", text: "hbLifestyle"},
-    { alt: "Donation", text: "Donation"},
-    { alt: "Offers", text: "Offers"},
+    { alt: "hbWellness", text: "hbWellness" },
+    { alt: "hbLifestyle", text: "hbLifestyle" },
+    { alt: "Donation", text: "Donation" },
+    { alt: "Offers", text: "Offers" },
   ];
 
   const removeUser = () => {
@@ -210,4 +210,4 @@ function Authpage() {
   );
 }
 
-export default Authpage;
+export default AuthPage;

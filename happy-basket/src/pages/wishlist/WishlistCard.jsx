@@ -21,51 +21,45 @@ function WishlistCard({ wishlist }) {
     <>
       {/* if wishlist.length > 0 ? mb-15 : mb-0 */}
       {/* For small and medium screen */}
-      <div className="lg:hidden">
-        {wishlist.map((item) => {
-          return (
-            <div
-              key={item.id}
-              className="relative h-70 p-1 shrink-0 bg-white shadow-gray-800"
+      {/* <div className="lg:hidden"> */}
+      {wishlist.map((item) => {
+        return (
+          <div
+            key={item.id}
+            className=" lg:hidden relative h-70 p-1 shrink-0 bg-white shadow-gray-800"
+          >
+            <Link to={`/product/${item.id}`}>
+              <img src={item.image} alt={item.name} className="h-50 mx-auto" />
+              <figcaption className="flex flex-col items-center w-full">
+                <p className="text-[0.7rem] line-clamp-1">{item.description}</p>
+                <p className="text-[0.8rem] flex items-center gap-2">
+                  <b>&#8377;{item.discountPrice}</b>
+                  <span className="text-[0.7rem] line-through text-gray-600">
+                    &#8377;{item.price}
+                  </span>
+                </p>
+              </figcaption>
+            </Link>
+
+            {/* Remove from wishlist button */}
+            <button
+              className="absolute flex justify-center size-6 pt-1 top-2 right-2 rounded-full bg-gray-700 active:bg-red-500"
+              onClick={() => handleRemoveFromWishlist(item.id)}
             >
-              <Link to={`/product/${item.id}`}>
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="h-50 mx-auto"
-                />
-                <figcaption className="flex flex-col items-center w-full">
-                  <p className="text-[0.7rem] line-clamp-1">
-                    {item.description}
-                  </p>
-                  <p className="text-[0.8rem] flex items-center gap-2">
-                    <b>&#8377;{item.discountPrice}</b>
-                    <span className="text-[0.7rem] line-through text-gray-600">
-                      &#8377;{item.price}
-                    </span>
-                  </p>
-                </figcaption>
-              </Link>
+              <MdOutlineDeleteForever className="text-white active:text-white" />
+            </button>
 
-              {/* Remove from wishlist button */}
-              <button
-                className="absolute flex justify-center size-6 pt-1 top-2 right-2 rounded-full bg-gray-700 active:bg-red-500"
-                onClick={() => handleRemoveFromWishlist(item.id)}
-              >
-                <MdOutlineDeleteForever className="text-white active:text-white" />
-              </button>
-
-              {/* Add to cart button */}
-              <button
-                onClick={() => handleAddToCart(item)}
-                className="btnStyle active:bg-green-700 active:text-white"
-              >
-                Add to Cart
-              </button>
-            </div>
-          );
-        })}
-      </div>
+            {/* Add to cart button */}
+            <button
+              onClick={() => handleAddToCart(item)}
+              className="btnStyle active:bg-green-700 active:text-white"
+            >
+              Add to Cart
+            </button>
+          </div>
+        );
+      })}
+      {/* </div> */}
 
       {/* For large screen */}
       {/* <div className="hidden lg:inline-block"> */}
@@ -73,7 +67,7 @@ function WishlistCard({ wishlist }) {
         return (
           <div
             key={item.id}
-            className="lg:inline-block h-85 p-2 shrink-0 bg-white shadow-lg"
+            className="hidden lg:inline-block h-85 p-2 shrink-0 bg-white shadow-lg"
           >
             <Link to={`/product/${item.id}`}>
               <div>
@@ -82,14 +76,6 @@ function WishlistCard({ wishlist }) {
                   alt={item.name}
                   className="h-40 w-30 mx-auto"
                 />
-                {/* <b className="lg:absolute lg:top-0 lg:right-0 text-[1.2rem] my-auto px-1 text-green-800 bg-linear-to-r from-green-300 to-white rounded-sm">
-                    {Math.floor(
-                      ((product.price - product.discountPrice) /
-                        product.price) *
-                        100,
-                    )}
-                    % OFF
-                  </b> */}
               </div>
 
               {/* product discount price and actual price */}

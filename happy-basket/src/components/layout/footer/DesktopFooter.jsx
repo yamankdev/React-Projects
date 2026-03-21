@@ -6,7 +6,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 function DesktopFooter() {
   return (
-    <footer className="text-white bg-zinc-900 z-90">
+    <footer className="text-white bg-zinc-900 z-90" id="footer">
       <div className="flex justify-evenly gap-20 lg:gap-60 lg:w-[80%] mx-auto py-5 lg:py-6 text-[0.6rem] lg:text-[0.8rem]">
         <div className="flex flex-col lg:leading-6">
           <h3 className="font-bold mb-2">HappyBasket</h3>

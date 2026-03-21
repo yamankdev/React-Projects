@@ -30,8 +30,8 @@ function MobileLogin() {
     }
 
     // For testing purpose
-    dispatch({ type: "USER_LOGIN", payload: mobile });
-    navigate("/");
+    // dispatch({ type: "USER_LOGIN", payload: mobile });
+    // navigate("/");
 
     setMessage("Mock OTP generated (shown below for demo)");
     console.log("Mock OTP generated (shown below for demo)");

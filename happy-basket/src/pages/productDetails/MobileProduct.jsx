@@ -14,6 +14,7 @@ import {
   RiHeart3Fill,
   RiHeart3Line,
 } from "react-icons/ri";
+import { discount } from "../../utils/product";
 
 function MobileProduct() {
   const { data } = useApiData();
@@ -111,10 +112,7 @@ function MobileProduct() {
               </del>
             </p>
             <b className="text-[0.7rem] my-auto px-1 text-green-700 bg-linear-to-r from-green-300 to-white rounded-sm">
-              {Math.floor(
-                ((product.price - product.discountPrice) / product.price) * 100,
-              )}
-              % OFF
+              {discount(product.price, product.discountPrice)}% OFF
             </b>
           </div>
         </div>

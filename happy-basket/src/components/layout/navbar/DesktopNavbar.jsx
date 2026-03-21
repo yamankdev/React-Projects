@@ -7,6 +7,7 @@ import NavMenubar from "./NavMenubar";
 import DesktopLoginModal from "../../../pages/auth/DesktopLoginModal";
 
 import { BsLightningFill, BsBasket2Fill } from "react-icons/bs";
+import { FaUserCircle } from "react-icons/fa";
 import { TiLocation, TiArrowSortedDown } from "react-icons/ti";
 import { LuUserRound, LuNotepadText } from "react-icons/lu";
 import { FaShoppingBasket } from "react-icons/fa";
@@ -16,6 +17,7 @@ function DesktopNavbar() {
   // const { data } = useApiData();
   const { state } = useUserData();
   const [showLogin, setShowLogin] = useState(false);
+  const [showUserDrop, setShowUserDrop] = useState(false);
 
   const { name, cart, addresses, mobile } = state.currentUser;
   let userAddr;
@@ -27,8 +29,10 @@ function DesktopNavbar() {
     const { house, landmark, area, city, pincode } = addrFromDB;
     userAddr = `${house}, ${landmark}, ${area}, ${city}, ${pincode}`;
   }
-  // console.log("Address for DB: ", addrFromDB);
-  // console.log("Address for screen: ", userAddr);
+
+  const handleLogout = () => {
+    dispatch({ type: "USER_LOGOUT" });
+  };
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -41,7 +45,7 @@ function DesktopNavbar() {
 
         <div className="flex flex-col gap-4 w-[80%] mt-2 m-auto sticky top-2">
           {/* Searchbar and CartList icon */}
-          <div className="flex gap-1 h-15 md:px-8 justify-between">
+          <div className="flex gap-1 h-15 md:px-4 justify-between">
             {/* Brand logo on large screen */}
             <Link to={"/"} className="my-auto">
               <img
@@ -69,15 +73,47 @@ function DesktopNavbar() {
 
             {/* Login and Signup on large screen */}
             {mobile ? (
-              <Link
-                // to="/login"
-                className=" bg-black text-white text-[0.7rem] text-center rounded-lg h-12 my-auto px-3 py-2"
-              >
-                <p className="flex flex-col">
-                  <span>{name}</span>
-                  <span>{mobile}</span>
-                </p>
-              </Link>
+              <>
+                <button
+                  onClick={() => setShowUserDrop(!showUserDrop)}
+                  className=" bg-black text-white text-[0.7rem] text-center rounded-lg h-12 my-auto px-3 py-2 hover:cursor-pointer"
+                >
+                  <FaUserCircle className="size-6" />
+                </button>
+                {showUserDrop && (
+                  <div className="absolute top-15 right-21 z-10 w-[25%] px-2 py-2 flex flex-col gap-2 text-white text-[0.8rem] bg-slate-950 rounded-sm">
+                    <Link
+                      to={"/profile"}
+                      onClick={() => setShowUserDrop(!showUserDrop)}
+                      className="p-2 hover:bg-gray-600 rounded-sm"
+                    >
+                      My Account
+                    </Link>
+                    <Link
+                      to={"/checkout"}
+                      onClick={() => setShowUserDrop(!showUserDrop)}
+                      className="p-2 hover:bg-gray-600 rounded-sm"
+                    >
+                      My Basket
+                    </Link>
+                    <Link className="p-2 hover:bg-gray-600 rounded-sm">
+                      My Orders
+                    </Link>
+                    <Link className="p-2 hover:bg-gray-600 rounded-sm">
+                      My Wallet
+                    </Link>
+                    <Link className="p-2 hover:bg-gray-600 rounded-sm">
+                      Contact Us
+                    </Link>
+                    <Link
+                      onClick={handleLogout}
+                      className="p-2 hover:bg-gray-600 rounded-sm"
+                    >
+                      Logout
+                    </Link>
+                  </div>
+                )}
+              </>
             ) : (
               <button
                 onClick={() => setShowLogin(true)}

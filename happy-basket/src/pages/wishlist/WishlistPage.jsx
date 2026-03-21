@@ -19,7 +19,7 @@ function WishlistPage() {
   };
 
   const wishlistMarginBottom =
-    wishlist.length > 2 ? { marginBottom: "3.75rem" } : { marginBottom: 0 };
+    wishlist.length > 2 ? { marginBottom: "4rem" } : { marginBottom: 0 };
 
   return (
     <div className="flex flex-col gap-1 h-screen bg-gray-200 ">

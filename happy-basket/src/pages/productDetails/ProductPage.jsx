@@ -2,8 +2,16 @@ import DesktopProduct from "./DesktopProduct";
 import MobileProduct from "./MobileProduct";
 
 function Productpage() {
-  const isDesktop = window.innerWidth >= 1024;
-  return isDesktop ? <DesktopProduct /> : <MobileProduct />;
+  return (
+    <>
+      <div className="lg:hidden">
+        <MobileProduct />
+      </div>
+      <div className="hidden lg:block">
+        <DesktopProduct />
+      </div>
+    </>
+  );
 }
 
 export default Productpage;

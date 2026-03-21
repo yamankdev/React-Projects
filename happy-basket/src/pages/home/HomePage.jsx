@@ -1,15 +1,17 @@
-import DesktopLayout from "../components/layout/DesktopLayout";
-import MobileLayout from "../../components/layout/footer/MobileLayout";
-// import { useData } from "../context/ApiDataProvider";
+import DesktopLayout from "./DesktopLayout";
+import MobileLayout from "./MobileLayout";
 
-function Homepage() {
-  const isDesktop = window.innerWidth >= 1024;
-
-  return isDesktop ? (
-    <DesktopLayout>{children}</DesktopLayout>
-  ) : (
-    <MobileLayout>{children}</MobileLayout>
+function HomePage() {
+  return (
+    <>
+      <div className="lg:hidden">
+        <MobileLayout />
+      </div>
+      <div className="hidden lg:block">
+        <DesktopLayout />
+      </div>
+    </>
   );
 }
 
-export default Homepage;
+export default HomePage;

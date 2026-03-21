@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useUserData } from "../../context/UserContext";
 
 import { IoBookmark, IoBookmarkOutline } from "react-icons/io5";
+import { discount } from "../../utils/product";
 
 function ProductSlideCard({ product }) {
   const { state, dispatch } = useUserData();
@@ -10,9 +11,9 @@ function ProductSlideCard({ product }) {
 
   // let isInWishlist;
   // useEffect(() => {
-    let isInWishlist = wishlist.some((p) => {
-      return p.id === product.id;
-    });
+  let isInWishlist = wishlist.some((p) => {
+    return p.id === product.id;
+  });
   // }, []);
 
   const handleWishlistToggle = () => {
@@ -41,10 +42,7 @@ function ProductSlideCard({ product }) {
             className="h-60 mx-auto"
           />
           <b className="lg:absolute lg:top-0 lg:right-0 text-[1.2rem] my-auto px-1 text-green-800 bg-linear-to-r from-green-300 to-white rounded-sm">
-            {Math.floor(
-              ((product.price - product.discountPrice) / product.price) * 100,
-            )}
-            % OFF
+            {discount(product.price, product.discountPrice)}% OFF
           </b>
         </div>
 
