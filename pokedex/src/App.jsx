@@ -15,11 +15,17 @@ function App() {
     try {
       // const res1 = await fetch(API, header);
       const res1 = await fetch(API);
+      if (!res1.ok) {
+        throw new Error(`Failed to fetch Pokémon list: ${res1.status}`);
+      }
       const data1 = await res1.json();
       //   console.log(data1.results);
 
       const allAPIs = data1.results.map(async (currData) => {
         const res2 = await fetch(currData.url);
+        if (!res2.ok) {
+          throw new Error(`Failed to fetch ${currData.name}: ${res2.status}`);
+        }
         const data2 = await res2.json();
         return data2;
       });
