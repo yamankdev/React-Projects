@@ -1,4 +1,11 @@
+// const getStatByName = (stats, name) => {
+//   stats.find((s) => s.stats.name === name)?.base.stats ?? "N/A";
+// };
+
 function PokemonCard({ pokemonData }) {
+  // const speed = getStatByName(pokemonData.stats, "speed");
+  // const attack = getStatByName(pokemonData.stats, "attack");
+
   return (
     <li className="pokemon-card">
       <figure>
@@ -23,6 +30,7 @@ function PokemonCard({ pokemonData }) {
         </p>
         <p className="pokemon-info">
           <span>Speed: </span> {pokemonData.stats[5].base_stat}
+          {/* <span>Speed: </span> {speed} */}
         </p>
       </div>
       <div className="grid-three-cols">
@@ -32,6 +40,7 @@ function PokemonCard({ pokemonData }) {
         </div>
         <div className="pokemon-info">
           <p>{pokemonData.stats[1].base_stat}</p>
+          {/* <p>{attack}</p> */}
           <span>Attack</span>
         </div>
         <div className="pokemon-info">
@@ -42,7 +51,8 @@ function PokemonCard({ pokemonData }) {
                   curAbs.ability.name.charAt(0).toUpperCase() +
                   curAbs.ability.name.slice(1),
               )
-              .join("\n")}
+              // .join("\n")}
+              .join(", ")}
           </p>
           <span>Abilities</span>
         </div>

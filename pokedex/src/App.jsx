@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import PokemonCard from "./components/PokemonCard";
 
-const API = "https://pokeapi.co/api/v2/pokemon?limit=100";
-const header = { type: "application/json" };
+const API = "https://pokeapi.co/api/v2/pokemon?limit=40";
+// const header = { "Content-Type": "application/json" };   //Header not needed as it doesn't contain body
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
@@ -13,7 +13,8 @@ function App() {
   //   Pokemon Data Fetching Function
   const fetchPokemon = async () => {
     try {
-      const res1 = await fetch(API, header);
+      // const res1 = await fetch(API, header);
+      const res1 = await fetch(API);
       const data1 = await res1.json();
       //   console.log(data1.results);
 
@@ -29,8 +30,10 @@ function App() {
       setLoading(false);
       //   console.log(detailedRes);
     } catch (err) {
-      console.log(err.message);
-      setError(err);
+      // console.log(err.message);
+      // setError(err);
+      console.error(err);
+      setError(err instanceof Error ? err : new Error(String(err)));
       setLoading(false);
     }
   };

@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Urbanist", sans-serif;
-}
-
+/* ---------- Base layer: global resets & typography ---------- */
 @layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Urbanist", sans-serif;
+  }
+
   html {
     font-size: 62.5%;
   }
@@ -55,122 +56,116 @@
     justify-content: center;
     filter: drop-shadow(0px 50px 100px rgba(50, 50, 93, 0.25));
   }
-}
 
-@layer utilities {
-}
-
-@layer components {
-}
-
-.container {
-  max-width: 152rem;
-  margin: auto;
-}
-
-.grid-three-cols {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.6rem;
-  text-align: center;
-  margin: 3.2rem 0;
-  align-items: end;
-}
-
-.pokemon-search {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 3.2rem;
-}
-
-.card-demo {
-  display: flex;
-  justify-content: center;
-
-  & .pokemon-card {
-    min-height: 32rem;
+  input[type="text"] {
+    appearance: none;
+    border: none;
+    outline: none;
+    width: 32rem;
+    border-bottom: 0.2em solid #020d35;
+    /* background: rgb(233 30 99 / 0.2); */
+    border-radius: 0.2em 0.2em 0 0;
+    padding: 0.8em;
+    font-size: 1.6rem;
+    color: #000000;
   }
 }
 
-input[type="text"] {
-  appearance: none;
-  border: none;
-  outline: none;
-  width: 32rem;
-  border-bottom: 0.2em solid #020d35;
-  background: rgba(#e91e63, 0.2);
-  border-radius: 0.2em 0.2em 0 0;
-  padding: 0.8em;
-  font-size: 1.6rem;
-  color: #000000;
-}
+/* ---------- Components layer: reusable classes ---------- */
+@layer components {
+  .container {
+    max-width: 152rem;
+    margin: 0 auto;
+  }
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  justify-content: center;
-  align-items: center;
-  gap: 3.2rem;
-}
+  .grid-three-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+    text-align: center;
+    margin: 3.2rem 0;
+    align-items: flex-end;
+  }
 
-.pokemon-card {
-  width: 36rem;
-  min-height: 42rem;
-  box-shadow:
-    rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-  background-color: #fff;
-  border-radius: 0.2rem;
-  padding: 1.6rem;
-  position: relative;
-}
+  .pokemon-search {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3.2rem;
+  }
 
-.pokemon-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 40%;
-  transform: rotate(180deg);
-  background-color: #ebfbf1;
-  border-radius: 50% 50% 100% 0% / 99% 100% 0% 1%;
-  z-index: 0;
-  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-  transition:
-    transform 0.3s,
-    box-shadow 0.3s;
-}
+  .card-demo {
+    display: flex;
+    justify-content: center;
+  }
 
-.pokemon-card:hover::before {
-  border-radius: 50% 50% 100% 0% / 99% 100% 0% 1%;
-  transition: all 0.3s;
-}
+  .card-demo .pokemon-card {
+    min-height: 32rem;
+  }
 
-.pokemon-card:hover {
-  transform: scale(1.03);
-  transition: all 0.3s;
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-}
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    align-items: center;
+    gap: 3.2rem;
+  }
 
-.pokemon-name {
-  font-size: 3.2rem;
-  text-align: center;
-  color: #000;
-  text-transform: capitalize;
-  margin-top: 3.5rem;
-  /* font-weight: bold; */
-}
+  .pokemon-card {
+    width: 36rem;
+    min-height: 42rem;
+    box-shadow:
+      rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+      rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    background-color: #fff;
+    border-radius: 0.2rem;
+    padding: 1.6rem;
+    position: relative;
+    transition: all 0.3s;
+  }
 
-.pokemon-highlight {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  .pokemon-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    transform: rotate(180deg);
+    background-color: #ebfbf1;
+    z-index: 0;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    transition:
+      transform 0.3s,
+      box-shadow 0.3s,
+      border-radius 0.3s;
+  }
 
-  margin: 1.6rem 0;
+  .pokemon-card:hover::before {
+    border-radius: 50% 50% 100% 0% / 99% 100% 0% 1%;
+  }
 
-  & p {
+  .pokemon-card:hover {
+    transform: scale(1.03);
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  }
+
+  .pokemon-name {
+    font-size: 3.2rem;
+    text-align: center;
+    color: #000;
+    text-transform: capitalize;
+    margin-top: 3.5rem;
+  }
+
+  .pokemon-highlight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.6rem 0;
+  }
+
+  .pokemon-highlight p {
     padding: 0.6rem 2.4rem;
     background-color: #2ecc71;
     border-radius: 20rem;
@@ -178,31 +173,191 @@ input[type="text"] {
     font-weight: bold;
     text-transform: capitalize;
   }
-}
 
-.pokemon-image {
-  width: 60%;
-  height: 15rem;
-}
+  .pokemon-image {
+    width: 60%;
+    height: 15rem;
+  }
 
-pokemon-info {
-  text-align: center;
-}
+  .pokemon-info {
+    text-align: center;
+  }
 
-/* ///////////////////////////////////////// */
-.short-container {
-  width: 65rem;
+  .short-container {
+    width: 65rem;
+  }
 
-  & h1 {
+  .short-container h1 {
     margin-bottom: 3.2rem;
   }
 
-  & p {
+  .short-container p {
     margin-bottom: 1.6rem;
   }
 
-  & button {
+  .short-container button {
     padding: 0.6rem 0;
     cursor: pointer;
   }
+
+  /* --- Counter button --- */
+  .counter {
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: var(--accent);
+    background: var(--accent-bg);
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+    margin-bottom: 24px;
+  }
+
+  .counter:hover {
+    border-color: var(--accent-border);
+  }
+
+  .counter:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* --- Hero stacked logos --- */
+  .hero {
+    position: relative;
+  }
+
+  .hero .base,
+  .hero .framework,
+  .hero .vite {
+    inset-inline: 0;
+    margin: 0 auto;
+  }
+
+  .hero .base {
+    width: 170px;
+    position: relative;
+    z-index: 0;
+  }
+
+  .hero .framework,
+  .hero .vite {
+    position: absolute;
+  }
+
+  .hero .framework {
+    z-index: 1;
+    top: 34px;
+    height: 28px;
+    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
+      scale(1.4);
+  }
+
+  .hero .vite {
+    z-index: 0;
+    top: 107px;
+    height: 26px;
+    width: auto;
+    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
+      scale(0.8);
+  }
+
+  /* --- Centered main content --- */
+  #center {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    place-content: center;
+    place-items: center;
+    flex-grow: 1;
+  }
+
+  /* --- Next steps section --- */
+  #next-steps {
+    display: flex;
+    border-top: 1px solid var(--border);
+    text-align: left;
+  }
+
+  #next-steps > div {
+    flex: 1 1 0;
+    padding: 32px;
+  }
+
+  #next-steps .icon {
+    margin-bottom: 16px;
+    width: 22px;
+    height: 22px;
+  }
+
+  #docs {
+    border-right: 1px solid var(--border);
+  }
+
+  #next-steps ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 8px;
+    margin: 32px 0 0;
+  }
+
+  #next-steps ul .logo {
+    height: 18px;
+  }
+
+  #next-steps ul a {
+    color: var(--text-h);
+    font-size: 16px;
+    border-radius: 6px;
+    background: var(--social-bg);
+    display: flex;
+    padding: 6px 12px;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: box-shadow 0.3s;
+  }
+
+  #next-steps ul a:hover {
+    box-shadow: var(--shadow);
+  }
+
+  #next-steps ul .button-icon {
+    height: 18px;
+    width: 18px;
+  }
+
+  /* --- Spacer & ticks --- */
+  #spacer {
+    height: 88px;
+    border-top: 1px solid var(--border);
+  }
+
+  .ticks {
+    position: relative;
+    width: 100%;
+  }
+
+  .ticks::before,
+  .ticks::after {
+    content: "";
+    position: absolute;
+    top: -4.5px;
+    border: 5px solid transparent;
+  }
+
+  .ticks::before {
+    left: 0;
+    border-left-color: var(--border);
+  }
+
+  .ticks::after {
+    right: 0;
+    border-right-color: var(--border);
+  }
+}
+
+/* ---------- Utilities layer (empty for now) ---------- */
+@layer utilities {
+  /* Put any extra one-off utility classes here if needed */
 }
